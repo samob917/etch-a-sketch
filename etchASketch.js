@@ -1,13 +1,20 @@
 let container = document.querySelector(".container");
 let gridSize = 16;
 
+function getRandomRGB() {
+    let red = Math.floor(Math.random()*255);
+    let green = Math.floor(Math.random()*255);
+    let blue = Math.floor(Math.random()*255);
+    return `rgb(${red},${green},${blue})`
+};
+
 function createGrid(gridSize) {
     for (let i = 0; i < gridSize*gridSize; i++) {
         let newDiv = document.createElement("div");
         newDiv.classList.add("grid-element");
         newDiv.setAttribute("id", `${i}`);
         newDiv.addEventListener("mouseenter", function (e) {
-            e.target.style.background = "blue";
+            e.target.style.background = getRandomRGB();
         });
         newDiv.style.width = `${95/gridSize}vw`;
         newDiv.style.height = `${95/gridSize}vh`;
