@@ -5,7 +5,7 @@ function getRandomRGB() {
     let red = Math.floor(Math.random()*255);
     let green = Math.floor(Math.random()*255);
     let blue = Math.floor(Math.random()*255);
-    return `rgb(${red},${green},${blue})`
+    return `rgba(${red},${green},${blue})`
 };
 
 function createGrid(gridSize) {
@@ -15,6 +15,7 @@ function createGrid(gridSize) {
         newDiv.setAttribute("id", `${i}`);
         newDiv.addEventListener("mouseenter", function (e) {
             e.target.style.background = getRandomRGB();
+            e.target.style.opacity = `${0.1 + Number(e.target.style.opacity)}`
         });
         newDiv.style.width = `${95/gridSize}vw`;
         newDiv.style.height = `${95/gridSize}vh`;
@@ -25,7 +26,7 @@ function createGrid(gridSize) {
 
 createGrid(16);
 
-let button = document.querySelector("button");
+let button = document.querySelector("#changeSize");
 button.onclick = function () {
     let requestedGridSize = Number(prompt("Enter number of squares per side, must be less than 100."));
 
@@ -39,4 +40,10 @@ button.onclick = function () {
     } else {
         alert("Error: Must be less than 100.")
     };
+};
+
+let reset = document.querySelector("#reset");
+reset.onclick = function () {
+    container.replaceChildren();
+    createGrid(gridSize);
 };
